@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    const baseUrl = 'https://jazda.webscrapp.rocks/'
+    const baseUrl = 'https://jazda.dobroedelo39.ru/'
     const signsImagesBasePath = 'https://raw.githubusercontent.com/pohape/polish-driving-exam-tests-in-russian/main/images/znaki/'
 
     const regexRegistrationDate = /Konto zostało utworzone: (.*?)<\/p>/;
