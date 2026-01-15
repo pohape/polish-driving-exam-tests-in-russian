@@ -1,0 +1,19 @@
+#!/bin/sh
+set -e
+
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
+if [ "$branch" = "release" ]; then
+  if [ -e docker-compose.override.yml ] || [ -e docker-compose.override.yaml ]; then
+    echo "ERROR: docker-compose.override.yml/yaml must not exist on the release branch." >&2
+    exit 1
+  fi
+
+  if [ -f "$(git rev-parse --git-dir)/MERGE_HEAD" ]; then
+    exit 0
+  fi
+
+  echo "ERROR: direct commits to 'release' are blocked; merge from 'main' instead." >&2
+  exit 1
+fi
+
+exit 0
