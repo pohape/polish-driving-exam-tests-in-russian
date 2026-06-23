@@ -1,0 +1,8 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Не вливать локальный dev-override в release при merge из main.
+# Требует один раз на клон: git config merge.ours.driver true
+# См. .githooks/pre-commit и update.sh (require_no_override).
+/docker-compose.override.yaml merge=ours
+/docker-compose.override.yml  merge=ours

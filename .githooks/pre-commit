@@ -1,6 +1,13 @@
 #!/bin/sh
 set -e
 
+# Защита ветки release:
+#  - docker-compose.override.* (dev-дельта) НЕ должен попадать в release;
+#  - прямые коммиты в release запрещены — только merge из main.
+# Включается один раз на клон:
+#   git config core.hooksPath .githooks
+#   git config merge.ours.driver true   (для merge=ours, см. .gitattributes)
+
 branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "")
 if [ "$branch" = "release" ]; then
   if [ -e docker-compose.override.yml ] || [ -e docker-compose.override.yaml ]; then
