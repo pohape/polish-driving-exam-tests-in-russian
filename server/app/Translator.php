@@ -32,9 +32,8 @@ class Translator extends Base
         $apiKey = $keys[array_rand($keys)];
 
         $prompt = 'Фрагмент для перевода: "' . $userData . '"';
-        $model = getenv('OPENAI_MODEL') ?: env('OPENAI_MODEL') ?: 'gpt-5-mini';
+        $model = getenv('OPENAI_MODEL') ?: env('OPENAI_MODEL') ?: 'gpt-5.4-mini';
         $maxCompletionTokens = getenv('OPENAI_MAX_COMPLETION_TOKENS') ?: env('OPENAI_MAX_COMPLETION_TOKENS');
-        $temperature = getenv('OPENAI_TEMPERATURE') ?: env('OPENAI_TEMPERATURE');
         $data = [
             'model' => $model,
             'messages' => [
@@ -45,10 +44,6 @@ class Translator extends Base
 
         if ($maxCompletionTokens !== false && $maxCompletionTokens !== null && $maxCompletionTokens !== '') {
             $data['max_completion_tokens'] = (int) $maxCompletionTokens;
-        }
-
-        if ($temperature !== false && $temperature !== null && $temperature !== '') {
-            $data['temperature'] = (float) $temperature;
         }
 
         $headers = [
