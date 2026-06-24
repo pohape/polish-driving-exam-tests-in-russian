@@ -2,10 +2,11 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-mkdir -p server/storage/
-chmod 777 server/storage/translations.json
-chown -R 33:33 server/storage
-chmod -R u+rwX,g+rwX server/storage
+mkdir -p server/storage
+# storage is written by the container's www-data (uid 33). Use sudo so chown/chmod
+# succeed even when files were created by the container (owned by uid 33, not us).
+sudo chown -R 33:33 server/storage
+sudo chmod -R u+rwX,g+rwX server/storage
 
 if docker compose version >/dev/null 2>&1; then
   COMPOSE=(docker compose)
