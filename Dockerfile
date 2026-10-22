@@ -1,5 +1,5 @@
 # --- App image: Apache + PHP 8.2 ---
-FROM php:8.2-apache
+FROM php:8.2.35-apache@sha256:fa8966fbaaa06981e549e7a33eb8a68f4cf677d6a82e1d6350adc5d85fe8f740
 
 # System deps + PHP extensions
 RUN apt-get update \
